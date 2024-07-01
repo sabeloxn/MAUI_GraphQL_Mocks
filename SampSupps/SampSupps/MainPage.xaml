@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:SampSupps.Models"
+             xmlns:viewModels="clr-namespace:SampSupps.ViewModels"
+             x:DataType="viewModels:MainPageViewModel"
+             x:Class="SampSupps.MainPage"
+             Title="Sale">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            EventName="Appearing"
+            Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        <Style x:Key="SecondaryMedLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Gray500}"/>
+        </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20">
+        <!--  -->
+            <Grid Grid.RowDefinitions="*,*,*"  Grid.ColumnDefinitions="*,*,*">
+                <Label Text="{Binding SaleDate, StringFormat='{0:D}'}" FontSize="25" Margin="8,8,0,0"
+                        Grid.Row= "0" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                <Label Text="{Binding StoreLocation}" FontSize="16" Margin="8,8,0,0"
+                        Grid.Row= "1" Grid.Column="0" Grid.ColumnSpan="1" Style="{StaticResource SecondaryMedLabel}"/>
+
+                <Label Text="{Binding PurchaseMethod}" FontSize="16" Margin="8,8,0,0"
+                        Grid.Row= "1" Grid.Column="1" Grid.ColumnSpan="1" Style="{StaticResource SecondaryMedLabel}"/>
+
+                <!-- <Label Text="{Binding CouponUsed}" FontSize="16" Margin="8,8,0,0"
+                        Grid.Row= "1" Grid.Column="2" Grid.ColumnSpan="1" Style="{StaticResource SecondaryMedLabel}"/> -->
+            </Grid>
+        <!--  -->
+            <CollectionView ItemsSource="{Binding Items}" EmptyView="No items to display" 
+                            SelectionMode="None"
+                            Grid.Row="1" Grid.ColumnSpan="2" >
+    
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
+                    <!-- COLLECTION VIEW -->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:items">
+                            <Border StrokeThickness="1" Stroke="{StaticResource Gray100}" Margin="5" Padding="8">
+                                <!-- GRID -->
+                                <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="20,18,18" Grid.RowSpacing="3" Grid.ColumnSpacing="8" Margin="0" Padding="0">
+                                    
+                                    <!--  -->
+                                    <Label Text ="{Binding name}"         Grid.Row= "0" Grid.Column="1" Grid.ColumnSpan="4" FontFamily="Arial" FontAttributes="Bold" FontSize="20"/>
+                                    <Label Text ="Price"                      Grid.Column="1"  Grid.Row= "1" HorizontalOptions="Center" Style="{StaticResource SecondaryMedLabel}"/>
+                                    <Label Text ="{Binding price}"        Grid.Row= "2" Grid.Column="1"  HorizontalOptions="Center"/>
+                                    <Label Text ="Quantity"               Grid.Row= "1" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="End" Style="{StaticResource SecondaryMedLabel}"/>
+                                    <Label Text ="{Binding quantity}"     Grid.Row= "2" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="End"/>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView> 
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
