@@ -10,9 +10,12 @@ public partial class MainPageViewModel : BaseViewModel
     public MainPageViewModel()
     {
         items = new ObservableCollection<items>();
+        //sales = new ObservableCollection<sales>();
     }
     [ObservableProperty]
     ObservableCollection<items> items ;
+    // [ObservableProperty]
+    // ObservableCollection<sales> sales ;
     [ObservableProperty]
     private string id;
     [ObservableProperty]
@@ -69,4 +72,38 @@ public partial class MainPageViewModel : BaseViewModel
             Items.Add(item);    
         }
     }
+
+//---------------------------------------------------------------------------------+
+// Get Sale Query                                                                  +
+//---------------------------------------------------------------------------------+ 
+    // [RelayCommand]
+    // private async Task OnAppearing()
+    // {
+    //     Console.Write("");
+    //     var query = @"query($limit: Int!) {
+    //                     sales(limit: $limit) {
+    //                         id
+    //                         couponUsed
+    //                         purchaseMethod
+    //                         saleDate
+    //                         storeLocation
+    //                     }
+    //                     }";
+    //     var saleReq = new GraphQLRequest
+    //     {
+    //         Query = query,
+
+    //         Variables = new 
+    //         {
+    //             limit = 3, 
+    //         }
+    //     };
+
+    //     var graphQLResponse = await graphQLClient.SendQueryAsync<GraphQLResponse>(saleReq);
+
+    //     foreach(sales sale in graphQLResponse.Data.sales)
+    //     {
+    //         Sales.Add(sale);    
+    //     }
+    // }
 }
